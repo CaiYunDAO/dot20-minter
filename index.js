@@ -6,7 +6,7 @@ import { ApiPromise, WsProvider, Keyring } from "@polkadot/api";
   // 导入账户
   const keyring = new Keyring({ type: "sr25519" });
   // 这里填自己的助记词
-  const my = keyring.addFromUri("action");
+  const my = keyring.addFromUri("助记词");
 
   // 286275
   async function mint(token) {
@@ -31,18 +31,17 @@ import { ApiPromise, WsProvider, Keyring } from "@polkadot/api";
     try {
       console.log(`开始铸造第${i + 1}个`);
       const mintHash = await mint("DOTA");
-      if (mintHash.hash.toHex().length !== 0) {
-        num++;
-        console.log(`铸造上链成功，hash: ${mintHash}，等待${wait}秒`);
-      } else {
-        throw new Error("fail");
-      }
+      console.log(`铸造上链成功，hash: ${mintHash}`);
+      i++;
     } catch (e) {
       console.log(`铸造失败，等待${wait}秒`);
     } finally {
-      if (i !== num - 1) {
-        await sleep(wait * 1000);
+      if (i === num) {
+        console.log("====================================");
+        console.log(`铸造完成，共铸造${num}个`);
+        return;
       }
+      await sleep(wait * 1000);
     }
   }
 })();
