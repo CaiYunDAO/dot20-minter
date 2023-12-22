@@ -14,7 +14,7 @@ import { ApiPromise, WsProvider, Keyring } from "@polkadot/api";
       `{"p":"dot-20","op":"mint","tick":"${token}"}`
     );
 
-    return await api.tx.utility.batch([tx1, tx2]).signAndSend(my);
+    return await api.tx.utility.batchAll([tx1, tx2]).signAndSend(my);
   }
 
   // 这里填需要铸造的数量
