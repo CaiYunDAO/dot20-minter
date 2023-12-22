@@ -18,4 +18,4 @@ npm install
 
 ```bash
 node index.js
-```# dot20-minter
+```
